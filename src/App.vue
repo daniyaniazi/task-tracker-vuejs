@@ -3,7 +3,11 @@
     <Header title="Task Tracker" />
     <!-- since task is dynamic we bind it -->
     <!-- keep this  attribute up-to-date -->
-    <Task @delete-task="deleteTask" v-bind:tasks="tasks" />
+    <Task
+      @toggle-reminder="toggleReminder"
+      @delete-task="deleteTask"
+      v-bind:tasks="tasks"
+    />
   </div>
 </template>
 
@@ -24,8 +28,22 @@ export default {
   },
   methods: {
     deleteTask(id) {
-      this.tasks = this.tasks.filter((task) => {
-        return task.id !== id;
+      if (confirm("Are you sure")) {
+        this.tasks = this.tasks.filter((task) => {
+          return task.id !== id;
+        });
+      }
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            reminder: !task.reminder,
+          };
+        } else {
+          return task;
+        }
       });
     },
   },
@@ -48,7 +66,7 @@ export default {
         id: 3,
         text: "Master",
         day: "March 1st at 2:30pm",
-        reminder: true,
+        reminder: false,
       },
     ];
   },

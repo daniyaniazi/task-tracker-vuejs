@@ -1,5 +1,8 @@
 <template>
-  <div :class="[task.reminder ? 'reminder' : '', 'task']">
+  <div
+    @dblclick="doubleClick(task.id)"
+    :class="[task.reminder ? 'reminder' : '', 'task']"
+  >
     <h4>
       {{ task.text }}
       <i @click="onDelete(task.id)" class="fas fa-times"></i>
@@ -19,6 +22,10 @@ export default {
     onDelete(id) {
       //  Emiting a custom event
       this.$emit("delete-task", id);
+    },
+    doubleClick(id) {
+      console.log("reminder");
+      this.$emit("toggle-reminder", id);
     },
   },
 };
