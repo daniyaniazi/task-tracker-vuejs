@@ -1,13 +1,24 @@
 <template>
   <form>
     <label for="task">Task : </label><br />
-    <input type="text" id="text" name="text" placeholder="enter task" /><br />
+    <input
+      type="text"
+      id="text"
+      name="text"
+      v-model="text"
+      placeholder="enter task"
+    /><br />
 
     <label for="day">Day and time</label><br />
-    <input type="text" id="day" name="day" /><br /><br />
+    <input type="text" id="day" name="day" v-model="day" /><br /><br />
 
     <label for="reminder">Set Reminder</label><br />
-    <input type="checkbox" id="reminder" name="reminder" /><br /><br />
+    <input
+      type="checkbox"
+      id="reminder"
+      v-model="reminder"
+      name="reminder"
+    /><br /><br />
 
     <input type="submit" value="Save Task" />
   </form>
@@ -18,7 +29,7 @@ export default {
   name: "AddTask",
   data() {
     return {
-      text: "",
+      text: "Test",
       day: "",
       reminder: false,
     };
