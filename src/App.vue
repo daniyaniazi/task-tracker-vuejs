@@ -1,86 +1,34 @@
 <template>
   <div class="container">
     <Header
-      @toogle-add-task="toogleAddTask"
+      @toogle-add-task="toggleAddTask"
       title="Task Tracker"
       :showAddTask="showAddTask"
     />
-    <AddTask v-show="showAddTask" @add-task="addTask" />
-    <!-- since task is dynamic we bind it -->
-    <!-- keep this  attribute up-to-date -->
-    <Task
-      @toggle-reminder="toggleReminder"
-      @delete-task="deleteTask"
-      v-bind:tasks="tasks"
-    />
+    <router-view :showAddTask="showAddTask"></router-view>
     <Footer />
   </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
-import Task from "./components/Tasks.vue";
-import AddTask from "./components/AddTask.vue";
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 export default {
   name: "App",
   components: {
     Header,
-    Task,
-    AddTask,
     Footer,
   },
-  // STATE JUST LIKE REACT
   data() {
     return {
-      tasks: [],
       showAddTask: false,
     };
   },
   methods: {
-    addTask(newTask) {
-      this.tasks = [...this.tasks, newTask];
-    },
-    deleteTask(id) {
-      if (confirm("Are you sure")) {
-        this.tasks = this.tasks.filter((task) => {
-          return task.id !== id;
-        });
-      }
-    },
-    toggleReminder(id) {
-      this.tasks = this.tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder } : task
-      );
-    },
-    toogleAddTask() {
+    toggleAddTask() {
+      console.log("trigger");
       this.showAddTask = !this.showAddTask;
-      console.log(this.showAddTask);
     },
-  },
-  // LIFECYCLE METHOD JUST WHEN COMPONENET IS CREATED
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: "Learn Vue",
-        day: "March 1st at 2:30pm",
-        reminder: true,
-      },
-      {
-        id: 2,
-        text: "Implement",
-        day: "March 1st at 2:30pm",
-        reminder: true,
-      },
-      {
-        id: 3,
-        text: "Master",
-        day: "March 1st at 2:30pm",
-        reminder: false,
-      },
-    ];
   },
 };
 </script>
@@ -92,7 +40,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding: 60px 0px;
+
   background: #35495e;
   height: 100%;
   color: aliceblue;

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>{{ title }}</h1>
+    <h1>{{ title }}{{ showAddTask }}</h1>
     <Button
       @toogle-add-task="$emit('toogle-add-task')"
       :text="showAddTask ? 'Close' : 'Add Task'"
