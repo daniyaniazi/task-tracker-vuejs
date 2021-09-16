@@ -1,7 +1,11 @@
 <template>
   <header>
     <h1>{{ title }}</h1>
-    <Button text="Add Task" color="#42b883" />
+    <Button
+      @toogle-add-task="$emit('toogle-add-task')"
+      text="Add Task"
+      color="#42b883"
+    />
   </header>
 </template>
 
@@ -17,9 +21,16 @@ export default {
       default: "Hello Vue",
     },
   },
+  methods: {
+    onToogle() {
+      console.log("clicked");
+      this.$emit("toogle-add-task");
+    },
+  },
   components: {
     Button,
   },
+  emits: ["toogle-add-task"],
 };
 </script>
 

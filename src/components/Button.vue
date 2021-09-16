@@ -1,5 +1,5 @@
 <template>
-  <button @click="onClick()" :style="{ background: color }">
+  <button @click="onClick" :style="{ background: color }">
     {{ text }}
   </button>
 </template>
@@ -13,7 +13,8 @@ export default {
   },
   methods: {
     onClick() {
-      console.log("clicked");
+      console.log("click");
+      this.$emit("toogle-add-task");
     },
   },
 };

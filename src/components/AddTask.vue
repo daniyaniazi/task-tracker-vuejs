@@ -1,18 +1,12 @@
 <template>
-  <form>
-    <label for="task">Task : </label><br />
-    <input
-      type="text"
-      id="text"
-      name="text"
-      v-model="text"
-      placeholder="enter task"
-    /><br />
+  <form @submit="OnSubmit">
+    <label for="task">Task </label>
+    <input type="text" id="text" name="text" v-model="text" /><br />
 
-    <label for="day">Day and time</label><br />
+    <label for="day">Day and time</label>
     <input type="text" id="day" name="day" v-model="day" /><br /><br />
 
-    <label for="reminder">Set Reminder</label><br />
+    <label for="reminder">Set Reminder</label>
     <input
       type="checkbox"
       id="reminder"
@@ -29,10 +23,29 @@ export default {
   name: "AddTask",
   data() {
     return {
-      text: "Test",
+      text: "",
       day: "",
       reminder: false,
     };
+  },
+  methods: {
+    OnSubmit(e) {
+      e.preventDefault();
+      if (!this.text) {
+        alert("please add Task");
+        return;
+      }
+      const newTask = {
+        id: Math.floor(Math.random() * 100000),
+        text: this.text,
+        day: this.day,
+        reminder: this.reminder,
+      };
+
+      this.$emit("add-task", newTask);
+
+      (this.text = ""), (this.day = ""), (this.reminder = false);
+    },
   },
 };
 </script>
@@ -42,18 +55,21 @@ form {
   text-align: left;
 
   background: #42b883;
-  width: 60%;
+  width: 50%;
   margin: auto;
   padding: 20px 0px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px #07301f;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 input {
+  box-sizing: border-box;
   margin-left: 20px;
   padding: 10px 20px;
-  border-radius: 10px;
+  display: inline-block;
+  width: 60%;
   outline: none;
   border: none;
   margin-bottom: 10px;
@@ -63,5 +79,6 @@ label {
   padding-bottom: 10px;
   color: #07301f;
   font-size: 18px;
+  float: left;
 }
 </style>

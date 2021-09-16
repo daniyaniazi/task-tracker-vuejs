@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Header title="Task Tracker" />
-    <AddTask />
+    <Header @toogle-add-task="toogleAddTask" title="Task Tracker" />
+    <AddTask v-show="showAddTask" @add-task="addTask" />
     <!-- since task is dynamic we bind it -->
     <!-- keep this  attribute up-to-date -->
     <Task
@@ -28,9 +28,13 @@ export default {
   data() {
     return {
       tasks: [],
+      showAddTask: false,
     };
   },
   methods: {
+    addTask(newTask) {
+      this.tasks = [...this.tasks, newTask];
+    },
     deleteTask(id) {
       if (confirm("Are you sure")) {
         this.tasks = this.tasks.filter((task) => {
@@ -42,6 +46,10 @@ export default {
       this.tasks = this.tasks.map((task) =>
         task.id === id ? { ...task, reminder: !task.reminder } : task
       );
+    },
+    toogleAddTask() {
+      this.showAddTask = !this.showAddTask;
+      console.log(this.showAddTask);
     },
   },
   // LIFECYCLE METHOD JUST WHEN COMPONENET IS CREATED
@@ -77,9 +85,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 60px;
+  padding: 60px 0px;
   background: #35495e;
-  height: 100vh;
+  height: 100%;
   color: aliceblue;
 }
 </style>
