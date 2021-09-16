@@ -13,11 +13,13 @@
       @delete-task="deleteTask"
       v-bind:tasks="tasks"
     />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
 import Task from "./components/Tasks.vue";
 import AddTask from "./components/AddTask.vue";
 
@@ -27,6 +29,7 @@ export default {
     Header,
     Task,
     AddTask,
+    Footer,
   },
   // STATE JUST LIKE REACT
   data() {
