@@ -3,7 +3,7 @@
     <Header title="Task Tracker" />
     <!-- since task is dynamic we bind it -->
     <!-- keep this  attribute up-to-date -->
-    <Task v-bind:tasks="tasks" />
+    <Task @delete-task="deleteTask" v-bind:tasks="tasks" />
   </div>
 </template>
 
@@ -21,6 +21,13 @@ export default {
     return {
       tasks: [],
     };
+  },
+  methods: {
+    deleteTask(id) {
+      this.tasks = this.tasks.filter((task) => {
+        return task.id !== id;
+      });
+    },
   },
   // LIFECYCLE METHOD JUST WHEN COMPONENET IS CREATED
   created() {

@@ -1,7 +1,7 @@
 <template>
   <div :key="task.id" v-for="task in tasks">
     <!-- Adding recieve event response action but data is in the up level component i,e App -->
-    <Task @delete-task="$emit('delete-task', id)" :task="task" />
+    <Task v-on:delete-task="$emit('delete-task', task.id)" :task="task" />
   </div>
 </template>
 
@@ -15,5 +15,9 @@ export default {
   components: {
     Task,
   },
+  emit: [
+    "delete-task",
+    // it is an array of events we are emiiting
+  ],
 };
 </script>
