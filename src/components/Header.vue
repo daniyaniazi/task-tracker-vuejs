@@ -3,8 +3,8 @@
     <h1>{{ title }}</h1>
     <Button
       @toogle-add-task="$emit('toogle-add-task')"
-      text="Add Task"
-      color="#42b883"
+      :text="showAddTask ? 'Close' : 'Add Task'"
+      :color="showAddTask ? 'white' : '#42b883'"
     />
   </header>
 </template>
@@ -20,6 +20,7 @@ export default {
       type: String,
       default: "Hello Vue",
     },
+    showAddTask: Boolean,
   },
   methods: {
     onToogle() {

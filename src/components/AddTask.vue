@@ -52,8 +52,6 @@ export default {
 
 <style scoped>
 form {
-  text-align: left;
-
   background: #42b883;
   width: 50%;
   margin: auto;
@@ -66,10 +64,9 @@ form {
 
 input {
   box-sizing: border-box;
-  margin-left: 20px;
-  padding: 10px 20px;
+  padding: 10px 5px;
   display: inline-block;
-  width: 60%;
+  width: 50%;
   outline: none;
   border: none;
   margin-bottom: 10px;

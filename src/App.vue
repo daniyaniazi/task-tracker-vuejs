@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <Header @toogle-add-task="toogleAddTask" title="Task Tracker" />
+    <Header
+      @toogle-add-task="toogleAddTask"
+      title="Task Tracker"
+      :showAddTask="showAddTask"
+    />
     <AddTask v-show="showAddTask" @add-task="addTask" />
     <!-- since task is dynamic we bind it -->
     <!-- keep this  attribute up-to-date -->
