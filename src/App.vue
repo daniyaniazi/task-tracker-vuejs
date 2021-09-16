@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
+    <AddTask />
     <!-- since task is dynamic we bind it -->
     <!-- keep this  attribute up-to-date -->
     <Task
@@ -14,11 +15,14 @@
 <script>
 import Header from "./components/Header.vue";
 import Task from "./components/Tasks.vue";
+import AddTask from "./components/AddTask.vue";
+
 export default {
   name: "App",
   components: {
     Header,
     Task,
+    AddTask,
   },
   // STATE JUST LIKE REACT
   data() {
@@ -35,16 +39,9 @@ export default {
       }
     },
     toggleReminder(id) {
-      this.tasks = this.tasks.map((task) => {
-        if (task.id === id) {
-          return {
-            ...task,
-            reminder: !task.reminder,
-          };
-        } else {
-          return task;
-        }
-      });
+      this.tasks = this.tasks.map((task) =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      );
     },
   },
   // LIFECYCLE METHOD JUST WHEN COMPONENET IS CREATED
